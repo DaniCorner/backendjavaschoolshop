@@ -44,6 +44,7 @@ public class OrderItemController {
         return ResponseEntity.ok(orderItems);
     }
 
+    // If the server cannot provide a response in an acceptable format Exception will be thrown
     @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     String handleMediaTypeNotAcceptable(

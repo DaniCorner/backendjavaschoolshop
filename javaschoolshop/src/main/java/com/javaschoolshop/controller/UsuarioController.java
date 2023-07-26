@@ -61,14 +61,13 @@ public class UsuarioController {
         if (usuarioExistente == null) {
             throw new Exception("User doesn't exist");
         }
-        // Actualiza los campos relevantes del usuario existente con los valores del usuario actualizado
         usuarioExistente.setNombre(usuarioActualizado.getNombre());
         usuarioExistente.setApellido(usuarioActualizado.getApellido());
         usuarioExistente.setEmail(usuarioActualizado.getEmail());
         usuarioExistente.setTelefono(usuarioActualizado.getTelefono());
         usuarioExistente.setPassword(usuarioActualizado.getPassword());
         usuarioExistente.setPerfil(usuarioActualizado.getPerfil());
-        // Guarda el usuario actualizado en la base de datos
+
         return usuarioService.guardarUsuario(usuarioExistente);
     }
 
@@ -76,7 +75,6 @@ public class UsuarioController {
     public ResponseEntity<Map<String, String>> uploadProfileImage(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
         String perfilURL = usuarioService.saveProfileImage(file);
 
-        // Update the Usuario entity with the profile image URL
         Usuario usuario = usuarioRepository.findById(id).orElse(null);
         if (usuario != null) {
             usuario.setPerfil(perfilURL);
